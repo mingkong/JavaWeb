@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+ <appender name="CONSOLE.ERR" class="org.apache.log4j.ConsoleAppender">
+        <param name="target" value="System.err"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[component] %-d{yyyy-MM-dd HH:mm:ss} %p [%t] %c.%M(%L) | %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="warn"/>
+            <param name="LevelMax" value="fatal"/>
+            <param name="AcceptOnMatch" value="false"/>
+        </filter>
+    </appender>
+
+    <appender name="CONSOLE.OUT" class="org.apache.log4j.ConsoleAppender">
+        <param name="target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[component] %-d{yyyy-MM-dd HH:mm:ss} %p [%t] %c.%M(%L) | %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="debug"/>
+            <param name="LevelMax" value="info"/>
+            <param name="AcceptOnMatch" value="false"/>
+        </filter>
+    </appender>
+     
+    <appender name="LOGFILE" class="org.apache.log4j.RollingFileAppender">
+        <param name="encoding" value="UTF-8" />
+	    <param name="File" value="./modules/component/logs/component.log" />
+	    <param name="Append" value="true" />
+	    <param name="MaxFileSize" value="3000KB" />
+	    <layout class="org.apache.log4j.PatternLayout">
+	      <param name="ConversionPattern" value="[component] %-d{yyyy-MM-dd HH:mm:ss} %p [%t] %c.%M(%L) | %m%n"/>
+	    </layout>
+   </appender>    
+
+    <logger name="com.lysoft.modules.component">
+        <level value="INFO"/>
+    </logger>
+    
+	<logger name="com.lysoft.business.component">
+        <level value="INFO"/>
+    </logger>
+    
+    <root>
+        <level value="WARN"/>
+        <appender-ref ref="CONSOLE.OUT"/>
+        <appender-ref ref="CONSOLE.ERR"/>
+        <appender-ref ref="LOGFILE"/>       
+    </root>
+
+</log4j:configuration>

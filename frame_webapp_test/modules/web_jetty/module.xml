@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+	<property name="key">web_jetty</property>
+	<property name="name">Jetty web服务器模块</property>
+	<property name="moduleClass">com.lysoft.modules.web.jetty.Module</property>
+	<property name="enable">true</property>
+	<property name="startOnLoad">true</property>
+	<property name="priority">20</property>
+	<property name="devMode">true</property>
+	<property name="description">
+		<![CDATA[
+			通过模块启动jetty服务器。
+		]]>
+	</property>
+</module>

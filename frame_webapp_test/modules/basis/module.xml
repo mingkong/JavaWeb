@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+	<property name="key">basis</property>
+	<property name="name">基础支撑模块</property>
+	<property name="moduleClass">com.lysoft.modules.basis.Module</property>
+	<property name="enable">true</property>
+	<property name="startOnLoad">true</property>
+	<property name="priority">0</property>
+	<property name="devMode">false</property>
+	<property name="description">
+		<![CDATA[
+			基础支撑模块提供数据源管理和认证数据库管理.
+		]]>
+	</property>
+</module>

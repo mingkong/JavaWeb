@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <data-source-configuration>
+ 	<ds-cfg key="test-poll-db" name="test" description="测试工程数据库">
+ 		<property name="provider_type" value="dbcp" />
+ 		<property name="config_file" value="test-db.properties" />
+ 	</ds-cfg> 
+ </data-source-configuration>

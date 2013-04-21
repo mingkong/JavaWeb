@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+	<property name="key">component</property>
+	<property name="name">服务组件加载容器模块</property>
+	<property name="moduleClass">com.lysoft.modules.component.Module</property>
+	<property name="enable">true</property>
+	<property name="startOnLoad">true</property>
+	<property name="priority">10</property>
+	<property name="devMode">true</property>
+	<property name="description">
+		<![CDATA[
+			服务组件管理容器模块。可以动态加载或者卸载模块服务组件包
+		]]>
+	</property>
+</module>

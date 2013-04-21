@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="frame_component_test" basedir="." default="usage">
+  <property file="build.properties" />
+  <property name="build.jar" value="${component.name}.jar"/>
+  <property name="build.dir" value="build"/>
+  <property name="dist.dir" value="dist"/>
+  <property name="run.dir" value="bin"/>
+  <property name="src.java.dir" value="src/main/java"/>
+  <property name="src.resources.dir" value="src/main/resources"/>
+  <property name="classes" value="${build.dir}/classes"/>
+  <property name="lib" value="lib"/>
+  <property name="module.path" value="modules/component"/>
+  <property name="module.lib" value="${module.path}/lib"/>			
+	
+  <target name="usage">
+          <echo message=""/>
+          <echo message=" build file"/>
+          <echo message="------------------------------------------------------"/>
+          <echo message=""/>
+          <echo message="Available targets are:"/>
+          <echo message=""/>
+          <echo message="clean      --> Clean output dirs"/>
+          <echo message="compile      --> Compile main Java sources and copy libraries"/>
+          <echo message="jar --> Build the jar archive"/>
+          <echo message="all        --> Clean, build, jar"/>
+          <echo message=""/>
+   </target>
+   
+   <!--清除classes目录 -->
+   <target name="clean">
+       <delete dir="${classes}"/>
+	   <delete dir="${build.dir}"/>
+   </target>
+   
+   <path id="compile.classpath">
+		<fileset dir="${lib}" >
+			<include name="**/**/*.jar"/>
+		</fileset>
+   		<fileset dir="${module.lib}" >
+   				<include name="**/**/*.jar"/>
+   		</fileset>
+		<fileset dir="${module.path}" >
+				<include name="module.jar"/>
+		</fileset>
+   	
+   </path>
+   
+   <!--编译所有相关的源代码到classes目录-->
+   <target name="compile" depends="clean">
+       <mkdir dir="${classes}"/>
+       <javac srcdir="${src.java.dir}" destdir="${classes}" encoding="UTF-8">
+	       <classpath refid="compile.classpath" />
+	   </javac>
+	   <copy todir="${classes}">
+			<fileset dir="${src.java.dir}">
+				<include name="**/*"/>
+				<exclude name="**/*.java"/>
+			</fileset>
+	   </copy>	   
+	   <copy todir="${classes}">
+			<fileset dir="${src.resources.dir}">
+				<include name="**/*" /> 
+			</fileset>
+	   </copy>	   
+    </target>
+	<target name="jar" depends="compile">
+		 <jar basedir="${classes}" destfile="${build.dir}/${build.jar}">
+
+		</jar>
+	</target>
+	<target name="deploy-jar" depends="jar">
+		 <copy todir="${module.path}/dev_components">
+				<fileset dir="${build.dir}">
+						<include name="${build.jar}" /> 
+				</fileset>
+		</copy>
+		<delete dir="${build.dir}"/>		
+	</target>
+	
+	<target name="all" depends="deploy-jar"/>
+
+</project>

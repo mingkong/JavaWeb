@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component 
+	key="test"
+	name="信息共享管理组件"
+	datasource-key="test-poll-db"
+	init-class="com.web.master.component.test.init.ComponentInitializer"
+	description="这是一个用于信息共享管理的组件">
+	
+	<service
+		key="user"
+		name="用户服务"
+		remotable="false"
+		description="提供用户服务的接口">
+		<service-invoker className="com.web.master.component.test.service.user.UserService" />
+	</service>
+</component>

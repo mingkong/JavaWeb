@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+	<application-key>aes</application-key>
+	<application-name>管理控制台</application-name>
+	<application-description>
+		<![CDATA[
+			管理控制台,用来提供统一的应用管理控制台.
+		]]>
+	</application-description>
+	<defintion>
+		<permission	url="aes:index" name="首页" description="首页" sort_num="1" />
+	</defintion>
+</application>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="frame_webapp_test" basedir="." default="usage">
+  <property file="build.properties" />	
+  <property name="build.war" value="${web.appname}.war"/>
+  <property name="build.dir" value="build"/>
+  <property name="dist.dir" value="${module.path}/dev_webapp"/>
+  <property name="src.java.dir" value="${web.src}"/>
+  <property name="src.resources.dir" value="${web.resources}"/>
+  <property name="web.classes" value="${web.path}/WEB-INF/classes"/>
+  <property name="web.lib" value="${web.path}/WEB-INF/lib"/>
+  <property name="lib" value="lib"/>
+ 	
+  <target name="usage">
+          <echo message=""/>
+          <echo message=" build file"/>
+          <echo message="------------------------------------------------------"/>
+          <echo message=""/>
+          <echo message="Available targets are:"/>
+          <echo message=""/>
+          <echo message="clean      --> Clean output dirs"/>
+          <echo message="compile      --> Compile main Java sources and copy libraries"/>
+          <echo message="jar --> Build the jar archive"/>
+          <echo message="all        --> Clean, build, jar"/>
+          <echo message=""/>
+   </target>
+   
+   <!--清除classes目录 -->
+   <target name="clean">
+   	   <echo message="delete files" />
+   	   <delete includeEmptyDirs="true">
+   	 		<fileset dir="${web.classes}" includes="**/*"/>
+   		</delete>
+	   <delete file="${dist.dir}/${build.war}"/>
+   </target>
+   
+   <path id="compile.classpath">
+		<fileset dir="${lib}" >
+			<include name="**/**/*.jar"/>
+		</fileset>
+		<fileset dir="${module.path}" >
+			<include name="module.jar"/>
+		</fileset>   	
+   		<fileset dir="${module.path}/lib" >
+   				<include name="**/**/*.jar"/>
+   		</fileset>
+		<fileset dir="${web.lib}" >
+				<include name="**/**/*.jar"/>
+		</fileset>   	
+   </path>
+   
+   <!--编译所有相关的源代码到classes目录-->
+   <target name="compile" depends="clean">       
+       <javac srcdir="${src.java.dir}" destdir="${web.classes}" encoding="UTF-8">
+	       <classpath refid="compile.classpath" />
+	   </javac>
+	   <copy todir="${web.classes}">
+			<fileset dir="${src.java.dir}">
+				<include name="**/*"/>
+				<exclude name="**/*.java"/>
+			</fileset>
+	   </copy> 
+	   <copy todir="${web.classes}">
+			<fileset dir="${src.resources.dir}">
+				<include name="**/*"/>
+				<exclude name="**/*.java"/>
+			</fileset>
+	   </copy>   	
+    </target>
+	<!-- 打包war包 --> 
+	<target name="war" depends="compile">
+		<echo message="${dist.dir}/${build.war}" />
+		<echo message="${web.path}" />
+		<!--
+		<zip zipfile="${dist.dir}/${build.war}" update="no">
+		 	<fileset dir="${web.path}">
+		 		<include name="**"/>
+		 		<exclude name="**/*.log"/>
+		 	</fileset>
+		</zip>
+		-->
+        <war warfile="${dist.dir}/${build.war}" webxml="${web.path}/WEB-INF/web.xml">           
+            <fileset dir="${web.path}"/>  
+        </war>		
+	</target>
+</project>
